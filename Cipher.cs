@@ -109,18 +109,18 @@ public class Cipher
 	#region FSM Clocking
 	public uint ClockFSM()
 	{
-		long s15 = lfsr[15];
-		long s5 = lfsr[5];
+		uint s15 = lfsr[15];
+		uint s5 = lfsr[5];
 
-		long F = ((s15 + (long)fsm[0]) % (long)(Math.Pow(2, 32))) ^ (long)fsm[1];
+		uint F = (s15 + fsm[0]) ^ fsm[1];
 
-		long r = fsm[1] ^ ((s5 + (long)fsm[2]) % (long)(Math.Pow(2, 32)));
+		uint r = fsm[1] + (s5 ^ fsm[2]);
 
 		fsm[2] = S2(fsm[1]);
 		fsm[1] = S1(fsm[0]);
-		fsm[0] = (uint)r;
+		fsm[0] = r;
 
-		return (uint)F;
+		return F;
 	}
 
 	#endregion

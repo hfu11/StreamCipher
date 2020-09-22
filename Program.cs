@@ -40,33 +40,33 @@ public class Program
 		uint N = Convert.ToUInt32(strN[1]);
 
 		Cipher cipher = new Cipher();
-		cipher.Sr(0x12);
-		//cipher.Init(K,V);
-		//Console.WriteLine("Hello World! + {0:x} + {1:x}",K[3],V[3]);
+		//cipher.ClockFSM(0xffffffff, 2);
+		cipher.Init(K, V);
+		Console.WriteLine("Hello World! + {0:x} + {1:x}", K[3], V[3]);
 
 
 
-		////initialization
-		//for (int i = 0; i < 32; i++)
-		//{
-		//	var F = cipher.ClockFSM();
-		//	cipher.InitLFSR(F);
-		//}
+		//initialization
+		for (int i = 0; i < 32; i++)
+		{
+			var F = cipher.ClockFSM();
+			cipher.InitLFSR(F);
+		}
 
-		////KeyStream PreProcess
-		//cipher.ClockFSM();
-		//cipher.KeyStreamLFSR();
+		//KeyStream PreProcess
+		cipher.ClockFSM();
+		cipher.KeyStreamLFSR();
 
-		////Generation
-		//string[] res = new string[N];
-		//for (int i = 0; i < N; i++)
-		//{
-		//	var F = cipher.ClockFSM();
-		//	res[i] = (F ^ cipher.lfsr[0]).ToString("x");
-		//	cipher.KeyStreamLFSR();
-		//}
+		//Generation
+		string[] res = new string[N];
+		for (int i = 0; i < N; i++)
+		{
+			var F = cipher.ClockFSM();
+			res[i] = (F ^ cipher.lfsr[0]).ToString("x");
+			cipher.KeyStreamLFSR();
+		}
 
-		////WriteFile
-		//System.IO.File.WriteAllLines("output.txt", res);
+		//WriteFile
+		System.IO.File.WriteAllLines("output.txt", res);
 	}
 }
