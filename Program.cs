@@ -40,9 +40,7 @@ public class Program
 		uint N = Convert.ToUInt32(strN[1]);
 
 		Cipher cipher = new Cipher();
-		//cipher.ClockFSM(0xffffffff, 2);
 		cipher.Init(K, V);
-		Console.WriteLine("Hello World! + {0:x} + {1:x}", K[3], V[3]);
 
 
 
@@ -62,7 +60,7 @@ public class Program
 		for (int i = 0; i < N; i++)
 		{
 			var F = cipher.ClockFSM();
-			res[i] = (F ^ cipher.lfsr[0]).ToString("x");
+			res[i] = (F ^ cipher.lfsr[0]).ToString("x8");
 			cipher.KeyStreamLFSR();
 		}
 
