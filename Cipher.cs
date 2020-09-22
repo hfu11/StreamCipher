@@ -41,14 +41,6 @@ public class Cipher
 
 	}
 
-    //public void ClockLFSR(uint F)
-    //{
-    //	if (!lfsrMode)
-    //		InitLFSR(F);
-    //	else
-    //		KeyStreamLFSR();
-    //}
-
     #region LFSR Clocking
     public void InitLFSR(uint F)
 	{
